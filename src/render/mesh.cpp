@@ -1481,6 +1481,8 @@ Mesh<Float, Spectrum>::compute_surface_interaction(const Ray3f &ray,
     Vector3f dp0 = p1 - p0,
              dp1 = p2 - p0;
 
+    si.prim_area = 0.5f * dr::norm(dr::cross(dp0, dp1));
+
     if (has_vertex_texcoords() &&
         likely(has_flag(ray_flags, RayFlags::UV) ||
                has_flag(ray_flags, RayFlags::dPdUV))) {

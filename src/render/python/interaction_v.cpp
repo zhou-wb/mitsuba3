@@ -50,7 +50,10 @@ MI_PY_EXPORT(SurfaceInteraction) {
         .def_field(SurfaceInteraction3f, duv_dy,        D(SurfaceInteraction, duv_dy))
         .def_field(SurfaceInteraction3f, wi,            D(SurfaceInteraction, wi))
         .def_field(SurfaceInteraction3f, prim_index,    D(SurfaceInteraction, prim_index))
+        // .def_field(SurfaceInteraction3f, prim_area,     D(SurfaceInteraction, prim_area))
         .def_field(SurfaceInteraction3f, instance,      "instance"_a.none(), D(SurfaceInteraction, instance))
+
+        .def_field(SurfaceInteraction3f, prim_area,  "Primitive area"_a)
 
         // Methods
         .def(nb::init<>(), D(SurfaceInteraction, SurfaceInteraction))

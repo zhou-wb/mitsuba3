@@ -225,6 +225,9 @@ struct SurfaceInteraction : Interaction<Float_, Spectrum_> {
     /// Primitive index, e.g. the triangle ID (if applicable)
     Index prim_index;
 
+    /// Primitive area (only valid for Mesh)
+    Float prim_area;
+
     /// Stores a pointer to the parent instance (if applicable)
     ShapePtr instance = nullptr;
 
@@ -264,6 +267,7 @@ struct SurfaceInteraction : Interaction<Float_, Spectrum_> {
         duv_dy      = dr::zeros<Vector2f>(size);
         wi          = dr::zeros<Vector3f>(size);
         prim_index  = dr::zeros<Index>(size);
+        prim_area   = dr::zeros<Float>(size);
 
         if constexpr (dr::is_jit_v<Float_>) {
             shape       = dr::zeros<ShapePtr>(size);
@@ -526,7 +530,7 @@ struct SurfaceInteraction : Interaction<Float_, Spectrum_> {
 
     DRJIT_STRUCT(SurfaceInteraction, t, time, wavelengths, p, n, shape, uv,
                  sh_frame, dp_du, dp_dv, dn_du, dn_dv, duv_dx,
-                 duv_dy, wi, prim_index, instance)
+                 duv_dy, wi, prim_index, prim_area, instance)
 };
 
 // -----------------------------------------------------------------------------
@@ -788,6 +792,7 @@ std::ostream &operator<<(std::ostream &os, const SurfaceInteraction<Float, Spect
 
         os << "  wi = " << string::indent(it.wi, 7) << "," << std::endl
            << "  prim_index = " << it.prim_index << "," << std::endl
+           << "  prim_area = " << it.prim_area << std::endl
            << "  instance = " << string::indent(it.instance, 13) << std::endl
            << "]";
     }
