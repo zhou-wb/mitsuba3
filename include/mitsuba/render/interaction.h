@@ -225,6 +225,9 @@ struct SurfaceInteraction : Interaction<Float_, Spectrum_> {
     /// Primitive index, e.g. the triangle ID (if applicable)
     Index prim_index;
 
+    /// Global primitive index across all shapes in the scene
+    Index global_prim_index;
+
     /// Primitive area (only valid for Mesh)
     Float prim_area;
 
@@ -249,7 +252,7 @@ struct SurfaceInteraction : Interaction<Float_, Spectrum_> {
                                 const Wavelength &wavelengths)
         : Base(0.f, ps.time, wavelengths, ps.p, ps.n), uv(ps.uv),
           sh_frame(Frame3f(ps.n)), dp_du(0), dp_dv(0), dn_du(0), dn_dv(0),
-          duv_dx(0), duv_dy(0), wi(0), prim_index(0) {}
+          duv_dx(0), duv_dy(0), wi(0), prim_index(0), global_prim_index(0) {}
 
     /**
      * This callback method is invoked by dr::zeros<>, and takes care of fields that deviate
@@ -530,7 +533,7 @@ struct SurfaceInteraction : Interaction<Float_, Spectrum_> {
 
     DRJIT_STRUCT(SurfaceInteraction, t, time, wavelengths, p, n, shape, uv,
                  sh_frame, dp_du, dp_dv, dn_du, dn_dv, duv_dx,
-                 duv_dy, wi, prim_index, prim_area, instance)
+                 duv_dy, wi, prim_index, global_prim_index, prim_area, instance)
 };
 
 // -----------------------------------------------------------------------------

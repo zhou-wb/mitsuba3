@@ -1561,6 +1561,7 @@ Mesh<Float, Spectrum>::compute_surface_interaction(const Ray3f &ray,
     }
 
     si.prim_index = pi.prim_index;
+    si.global_prim_index = m_global_triangle_offset + pi.prim_index;
     si.shape    = this;
     si.instance = nullptr;
 

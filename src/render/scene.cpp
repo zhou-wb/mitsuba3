@@ -110,6 +110,15 @@ MI_VARIANT Scene<Float, Spectrum>::Scene(const Properties &props)
     update_emitter_sampling_distribution();
     update_silhouette_sampling_distribution();
 
+    // Compute total triangle count and assign global triangle offsets
+    m_total_triangle_count = 0;
+    for (Shape *shape : m_shapes) {
+        if (Mesh *mesh = dynamic_cast<Mesh *>(shape)) {
+            mesh->set_global_triangle_offset(m_total_triangle_count);
+            m_total_triangle_count += mesh->face_count();
+        }
+    }
+
     m_shapes_grad_enabled = false;
 }
 

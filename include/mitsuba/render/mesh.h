@@ -69,6 +69,11 @@ public:
     ScalarSize vertex_count() const { return m_vertex_count; }
     /// Return the total number of faces
     ScalarSize face_count() const { return m_face_count; }
+    
+    /// Return the global triangle offset for this mesh
+    ScalarSize global_triangle_offset() const { return m_global_triangle_offset; }
+    /// Set the global triangle offset for this mesh
+    void set_global_triangle_offset(ScalarSize offset) { m_global_triangle_offset = offset; }
 
     /// Return vertex positions buffer
     FloatStorage& vertex_positions_buffer() { return m_vertex_positions; }
@@ -616,6 +621,9 @@ protected:
     /// Pointer to the scene that owns this mesh
     Scene<Float, Spectrum>* m_scene = nullptr;
 
+    /// Global triangle offset for this mesh across all shapes in the scene
+    ScalarSize m_global_triangle_offset = 0;
+
     MI_DECLARE_TRAVERSE_CB(m_vertex_positions, m_vertex_normals,
                            m_vertex_texcoords, m_faces, m_E2E, m_sil_dedge_pmf,
                            m_mesh_attributes, m_area_pmf, m_parameterization)
@@ -641,6 +649,7 @@ DRJIT_CALL_TEMPLATE_INHERITED_BEGIN(mitsuba::Mesh, mitsuba::Shape)
 
     DRJIT_CALL_GETTER(vertex_count)
     DRJIT_CALL_GETTER(face_count)
+    DRJIT_CALL_GETTER(global_triangle_offset)
     DRJIT_CALL_GETTER(has_vertex_normals)
     DRJIT_CALL_GETTER(has_vertex_texcoords)
     DRJIT_CALL_GETTER(has_mesh_attributes)

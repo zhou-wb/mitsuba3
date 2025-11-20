@@ -252,6 +252,9 @@ template <typename Ptr, typename Cls> void bind_mesh_generic(Cls &cls) {
        .def("face_count", [](const Ptr ptr) {
             return ptr->face_count();
         }, D(Mesh, face_count))
+       .def("global_triangle_offset", [](const Ptr ptr) {
+            return ptr->global_triangle_offset();
+        }, "Return the global triangle offset for this mesh")
        .def("has_vertex_normals", [](const Ptr ptr) {
             return ptr->has_vertex_normals();
         }, D(Mesh, has_vertex_normals))

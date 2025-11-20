@@ -96,6 +96,8 @@ MI_PY_EXPORT(Scene) {
              "ss"_a, "active"_a = true,
              D(Scene, invert_silhouette_sample))
         .def("shape_types", &Scene::shape_types, D(Scene, shape_types))
+        .def("total_triangle_count", &Scene::total_triangle_count,
+             "Return the total number of triangles across all meshes in the scene")
         // Accessors
         .def_method(Scene, bbox)
         .def("sensors",

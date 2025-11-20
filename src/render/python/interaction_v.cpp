@@ -50,6 +50,7 @@ MI_PY_EXPORT(SurfaceInteraction) {
         .def_field(SurfaceInteraction3f, duv_dy,        D(SurfaceInteraction, duv_dy))
         .def_field(SurfaceInteraction3f, wi,            D(SurfaceInteraction, wi))
         .def_field(SurfaceInteraction3f, prim_index,    D(SurfaceInteraction, prim_index))
+        .def_field(SurfaceInteraction3f, global_prim_index, "Global primitive index across all shapes")
         // .def_field(SurfaceInteraction3f, prim_area,     D(SurfaceInteraction, prim_area))
         .def_field(SurfaceInteraction3f, instance,      "instance"_a.none(), D(SurfaceInteraction, instance))
 
@@ -96,7 +97,7 @@ MI_PY_EXPORT(SurfaceInteraction) {
 
     MI_PY_DRJIT_STRUCT(si, SurfaceInteraction3f, t, time, wavelengths, p, n,
                        shape, uv, sh_frame, dp_du, dp_dv, dn_du, dn_dv, duv_dx,
-                       duv_dy, wi, prim_index, instance)
+                       duv_dy, wi, prim_index, global_prim_index, prim_area, instance)
 }
 
 MI_PY_EXPORT(MediumInteraction) {

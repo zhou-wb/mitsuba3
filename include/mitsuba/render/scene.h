@@ -741,8 +741,11 @@ public:
      */
     bool shapes_grad_enabled() const { return m_shapes_grad_enabled; };
 
-    /// Returns a union of ShapeType flags denoting what is present in the ShapeGroup
+    /// Return a union of ShapeType flags denoting what is present in the ShapeGroup
     uint32_t shape_types() const;
+
+    /// Return the total number of triangles in the scene
+    size_t total_triangle_count() const { return m_total_triangle_count; }
 
     /// Return a human-readable string representation of the scene contents.
     virtual std::string to_string() const override;
@@ -833,6 +836,8 @@ protected:
 
     bool m_shapes_grad_enabled;
     bool m_thread_reordering;
+
+    size_t m_total_triangle_count = 0;
 
     /**
      * When the scene is defined on the CPU, traversal of the acceleration
