@@ -270,6 +270,7 @@ struct SurfaceInteraction : Interaction<Float_, Spectrum_> {
         duv_dy      = dr::zeros<Vector2f>(size);
         wi          = dr::zeros<Vector3f>(size);
         prim_index  = dr::zeros<Index>(size);
+        global_prim_index = dr::zeros<Index>(size);
         prim_area   = dr::zeros<Float>(size);
 
         if constexpr (dr::is_jit_v<Float_>) {
